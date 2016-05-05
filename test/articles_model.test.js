@@ -19,7 +19,7 @@ describe('Articles', function () {
    * First we clear the database and recreate the tables before beginning each run
    */
   before(function () {
-    return db.sequelize.sync({force: true});
+    return db.sync({force: true});
   });
 
   var fullText = 'The South African cliff swallow (Petrochelidon spilodera), also known as the South African swallow, is a species of bird in the Hirundinidae family.';
@@ -81,36 +81,7 @@ describe('Articles', function () {
     });
   });
 
-  /**
-   * Your model should have a timestamp called `lastUpdatedAt`
-   *
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#configuration
-   */
 
-  xit('has updatedAt field that is originally the time at creation', function (done) {
-
-    var timestampJustBeforeCreation = Date.now();
-
-    Article.create({
-      title: 'Ada Lovelace',
-      content: 'World\'s first computer programmer, predated any *actual* computer.'
-    }).then(function (createdArticle) {
-      var updatedAt = createdArticle.lastUpdatedAt;
-
-      expect(updatedAt).to.exist;
-      expect(updatedAt).to.be.an.instanceOf(Date);
-
-      expect(Number(updatedAt)).to.be.closeTo(timestampJustBeforeCreation, 5);
-
-      setTimeout(function () {
-        // should still be the same as before, seeing as we have not resaved
-        expect(createdArticle.lastUpdatedAt).to.equal(updatedAt);
-        done();
-      }, 50);
-
-    }).catch(done);
-
-  });
 
   /**
    * Set up a virtual field (check out sequelize getter methods) called `snippet`
@@ -128,7 +99,7 @@ describe('Articles', function () {
   });
 
   /**
-   * Set up an instance method (check out mongoose instanceMethods) called `truncate`
+   * Set up an instance method (check out sequelize instanceMethods) called `truncate`
    * that will shorten the article instance content to a passed-in length.
    * This method does not save to the backend, it just modifies the mongoose
    * object so the user can choose if and when to actually save.
@@ -175,31 +146,13 @@ describe('Articles', function () {
    * http://docs.sequelizejs.com/en/latest/docs/models-definition/#expansion-of-models
    */
 
-  xit('static method findByTitle finds one article by its title', function () {
+  xit('class method findByTitle finds one article by its title', function () {
 
     return Article.findByTitle('Migratory Birds')
       .then(function (article) {
         expect(article).not.to.be.an.instanceOf(Array);
         expect(article.content).to.equal(fullText);
       });
-
-  });
-
-  xit('recalculates lastUpdatedAt timestamp every time it is saved', function () {
-
-    var prevArticleUpdatedAt, timestampJustBeforeSave;
-    return Article.findOne({ where: { title: 'Migratory Birds' } }).then(function (article) {
-
-      prevArticleUpdatedAt = article.lastUpdatedAt;
-      timestampJustBeforeSave = Date.now();
-
-      article.content = 'The barn swallow is a bird of open country that normally uses man-made structures to breed and consequently has spread with human expansion.';
-
-      return article.save();
-    }).then(function (updatedArticle) {
-      expect(updatedArticle.lastUpdatedAt).to.be.above(prevArticleUpdatedAt);
-      expect(Number(updatedArticle.lastUpdatedAt)).to.be.closeTo(timestampJustBeforeSave, 5);
-    });
 
   });
 
@@ -235,6 +188,39 @@ describe('Articles', function () {
       });
   });
 
+  /**
+   * Your model should have a field called `version`,
+   * which increases by 1 every time you save
+   *
+   * http://docs.sequelizejs.com/en/latest/docs/hooks/
+   */
+
+  describe('has a version field', function() {
+    before(function() {
+      return Article.create({
+        title: 'Biological Immortality',
+        content: 'Biological immortality refers to a stable or decreasing rate of mortality from senescence, thus decoupling it from chronological age.'
+      });
+    });
+
+    xit('that is originally 0', function() {
+      return Article.findOne({where: {title: 'Biological Immortality'}})
+        .then(function(article) {
+          expect(article.version).to.equal(0);
+        });
+    });
+    
+    xit('that increments by 1 every time you update the document', function() {
+      return Article.findOne({where: {title: 'Biological Immortality'}})
+      .then(function(article) {
+        article.content = 'Biological immortality is a lie!';
+        return article.save();
+      })
+      .then(function(article) {
+        expect(article.version).to.equal(1);
+      });
+    });
+  });
 
   /** EXTRA CREDIT
    * Your Article model should have a tag field that's an array, but when we

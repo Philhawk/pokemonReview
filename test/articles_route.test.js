@@ -21,7 +21,7 @@ describe('Articles Route:', function () {
    * First we clear the database before beginning each run
    */
   before(function () {
-    return db.sequelize.sync({force: true});
+    return db.sync({force: true});
   });
 
   describe('GET /articles', function () {
@@ -168,6 +168,7 @@ describe('Articles Route:', function () {
      *   article: {
      *     id: ...
      *     title: ...
+     *     content: ...
      *   }
      * }
      */
@@ -241,6 +242,7 @@ describe('Articles Route:', function () {
      *   article: {
      *     id: ...
      *     title: ...
+     *     content: ...
      *   }
      * }
      */

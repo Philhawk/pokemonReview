@@ -1,14 +1,13 @@
 'use strict';
 
 var db = require('./database');
-var Sequelize = db.Sequelize;
-var sequelize = db.sequelize;
+var Sequelize = require('sequelize');
 
 // Make sure you have `postgres` running!
 
 //---------VVVV---------  your code below  ---------VVV----------
 
-var Article = sequelize.define('Article', {
+var Article = db.define('Article', {
 
 
 });

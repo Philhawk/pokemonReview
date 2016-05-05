@@ -1,10 +1,9 @@
 'use strict';
 
 var db = require('./database');
-var Sequelize = db.Sequelize;
-var sequelize = db.sequelize;
+var Sequelize = require('sequelize');
 
-var User = sequelize.define('User', {
+var User = db.define('User', {
   name: Sequelize.STRING
 });
 
