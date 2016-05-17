@@ -1,6 +1,6 @@
-# Assessment 3 - Express/Sequelize
+# Checkpoint 3 - Express/Sequelize
 
-This is the third assessment of the semester.  We're doing this primarily to help us understand how well you've absorbed.  Don't stress out that we will be using this test to judge you in any way except to understand how we can better help you.
+This is the third checkpoint of the semester.  We're doing this primarily to help us understand how well you've absorbed.  Don't stress out that we will be using this checkpoint to judge you in any way except to understand how we can better help you.
 
 To this end—and perhaps it goes without saying—we ask that you don't help each other or cheat.
 
@@ -17,7 +17,7 @@ The following resources are allowed:
 * All the slide decks that we've used in class.
 * Online docs and resources—but do not copy over any code.
 
-## Things we're testing
+## Things we're checking
 
 * Express App Structures 
 * Express Routing and Route Methods
