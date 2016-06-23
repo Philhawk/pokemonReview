@@ -142,12 +142,12 @@ describe('Articles Route:', function () {
     });
 
     /**
-     * Here we pass in a bad ID to the URL, we should get a 500 error
+     * Here we pass in a bad ID to the URL, we should get a 404 error
      */
-    xit('returns a 500 error if the ID is not correct', function () {
+    xit('returns a 404 error if the ID is not correct', function () {
       return agent
         .get('/articles/' + '74')
-        .expect(500);
+        .expect(404);
     });
 
   });
