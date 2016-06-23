@@ -5,6 +5,8 @@ var Sequelize = require('sequelize');
 
 // Make sure you have `postgres` running!
 
+var User = require('./user');
+
 //---------VVVV---------  your code below  ---------VVV----------
 
 var Article = db.define('Article', {

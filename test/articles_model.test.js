@@ -29,7 +29,7 @@ describe('Articles', function () {
    *
    * http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations
    */
-  it('has title and content fields of type String', function () {
+  it('has title and content fields', function () {
     return Article.create({
       title: 'Migratory Birds',
       content: fullText
@@ -48,8 +48,8 @@ describe('Articles', function () {
 
     return article.validate()
       .then(function(result) {
-        expect(result).to.be.an('object');
-        expect(result.message).to.equal('notNull Violation: content cannot be null');
+        expect(result).to.be.an.instanceOf(Error);
+        expect(result.message).to.contain('content cannot be null');
       });
     
 
@@ -58,13 +58,14 @@ describe('Articles', function () {
   xit('requires title', function () {
 
     var article = Article.build({
-      content: 'Some more wonderful text',
+      title: '',
+      content: 'Some more wonderful text'
     });
 
     return article.validate()
       .then(function (result) {
-        expect(result).to.be.an('object');
-        expect(result.message).to.equal('notNull Violation: title cannot be null');
+        expect(result).to.be.an.instanceOf(Error);
+        expect(result.message).to.contain('Validation error');
       });
 
   });
@@ -231,7 +232,7 @@ describe('Articles', function () {
    *
    * To activate this spec, change `xit` to `it`
    */
-  xit('has a tags field with a custom getter', function () {
+  xit('has a `tags` field with a custom getter', function () {
     return Article.create({
       title: 'Taggy',
       content: 'So Taggy',
