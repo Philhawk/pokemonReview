@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm run db-init && nodemon ./bin/www",
-    "test": "npm run db-init && nodemon --exec './node_modules/.bin/mocha --reporter spec --timeout 300 test/*.test.js || true'",
-    "grade": "npm run db-init && mocha --reporter spec --timeout 300 test/*.js",
-    "db-init": "psql -f db-init.sql"
+    "start": "nodemon ./bin/www",
+    "test": "nodemon --exec './node_modules/.bin/mocha --reporter spec --timeout 300 test/*.test.js || true'",
+    "grade": "mocha --reporter spec --timeout 300 test/*.js",
+    "db-init": "psql -f db-init.sql",
+    "postinstall": "npm run db-init"
   },
   "dependencies": {
     "async": "^1.4.2",
