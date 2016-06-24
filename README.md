@@ -27,8 +27,8 @@ The following resources are allowed:
 
 1. **Fork** this repo to your own github
 * Clone your fork to your local machine.
-* `npm install`
 * Make sure your Postgres database is running!
+* `npm install`
 * You can run `npm test` which will continuously run the test suite on file saves.
 * Read through the project structure, you'll be primarily working in `models/article.js` and  `routes/index.js` in that order.
 * Start working through the tests in `test/`.  You have to mark them as active (from pending) by changing `xit` to `it`
