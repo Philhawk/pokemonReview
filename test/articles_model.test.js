@@ -252,6 +252,10 @@ describe('Articles', function () {
    */
   xit('has a `tags` field with a custom getter', function () {
 
+    // tags should have a `defaultValue` that is an empty array.
+    expect(Article.attributes.tags.defaultValue).to.deep.equal([]);
+
+    // main functionality of tags
     return Article.create({
       title: 'Taggy',
       content: 'So Taggy',
