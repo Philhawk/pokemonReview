@@ -1,7 +1,5 @@
 {
-  "username": "fullstack",
-  "password": "fullstack4eva",
-  "database": "assessmentexpresssequelize",
+  "database": "checkpoint_express_sequelize",
   "host": "127.0.0.1",
   "dialect": "postgres",
   "logging": false

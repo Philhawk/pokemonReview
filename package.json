@@ -6,7 +6,7 @@
     "start": "nodemon ./bin/www",
     "test": "nodemon --exec 'mocha --reporter spec --timeout 300 test/*.test.js || true'",
     "grade": "mocha --reporter spec --timeout 300 test/*.js",
-    "db-init": "psql -f db-init.sql",
+    "db-init": "./db-init.sh",
     "postinstall": "npm run db-init"
   },
   "dependencies": {
