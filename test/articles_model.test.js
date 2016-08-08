@@ -27,7 +27,7 @@ describe('Articles', function () {
   /**
    * Your model should have two fields (both required): `title` and `content`.
    *
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations
+   * http://docs.sequelizejs.com/en/stable/docs/models-definition/#validations
    */
   it('has title and content fields', function () {
     return Article.create({
@@ -51,7 +51,7 @@ describe('Articles', function () {
         expect(result).to.be.an.instanceOf(Error);
         expect(result.message).to.contain('content cannot be null');
       });
-    
+
 
   });
 
@@ -88,7 +88,7 @@ describe('Articles', function () {
    * Set up a virtual field (check out sequelize getter methods) called `snippet`
    * that returns the first 23 characters of the content followed by "...".
    *
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#defining-as-part-of-the-model-options
+   * http://docs.sequelizejs.com/en/stable/docs/models-definition/#defining-as-part-of-the-model-options
    */
   xit('has a virtual 23-character snippet field appended with "..."', function () {
 
@@ -105,7 +105,7 @@ describe('Articles', function () {
    * This method does not save to the backend, it just modifies the mongoose
    * object so the user can choose if and when to actually save.
    *
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#expansion-of-models
+   * http://docs.sequelizejs.com/en/stable/docs/models-definition/#expansion-of-models
    */
   xit('has an instance method to truncate the content', function () {
 
@@ -144,7 +144,7 @@ describe('Articles', function () {
    * Set up a class method called findByTitle that's a convenience
    * method to find a *single* document by its title.
    *
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#expansion-of-models
+   * http://docs.sequelizejs.com/en/stable/docs/models-definition/#expansion-of-models
    */
 
   xit('class method findByTitle finds one article by its title', function () {
@@ -161,7 +161,7 @@ describe('Articles', function () {
    * Add a `belongsTo` relationship between articles and users,
    * but make sure the user is called `author` for each article.
    *
-   * http://docs.sequelizejs.com/en/latest/docs/associations/#belongsto
+   * http://docs.sequelizejs.com/en/stable/docs/associations/#belongsto
    */
 
   xit('belongs to a user, who is stored as the article\'s `author`', function() {
@@ -178,7 +178,7 @@ describe('Articles', function () {
         return article.setAuthor(user);
       })
       .then(function() {
-        return Article.findOne({ 
+        return Article.findOne({
           where: { title: 'Blue Wizards' },
           include: { model: User, as: 'author' }
         });
@@ -193,7 +193,7 @@ describe('Articles', function () {
    * Your model should have a field called `version`,
    * which increases by 1 every time you save
    *
-   * http://docs.sequelizejs.com/en/latest/docs/hooks/
+   * http://docs.sequelizejs.com/en/stable/docs/hooks/
    */
 
   describe('has a version field', function() {
@@ -210,7 +210,7 @@ describe('Articles', function () {
           expect(article.version).to.equal(0);
         });
     });
-    
+
     xit('that increments by 1 every time you update the document', function() {
       return Article.findOne({where: {title: 'Biological Immortality'}})
       .then(function(article) {
@@ -228,7 +228,7 @@ describe('Articles', function () {
    * access it, we should get one string: the tags joined by a comma and space
    *
    * Look at getters and setters:
-   * http://docs.sequelizejs.com/en/latest/docs/models-definition/#getters-setters
+   * http://docs.sequelizejs.com/en/stable/docs/models-definition/#getters-setters
    *
    * To activate this spec, change `xit` to `it`
    */
