@@ -55,7 +55,7 @@ describe('Articles', function () {
 
   });
 
-  xit('requires title', function () {
+  xit('requires title (in a more strict way than for content)', function () {
 
     var article = Article.build({
       title: '',
