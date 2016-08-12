@@ -14,10 +14,22 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/', routes);
 
-// custom error handling to remove stack trace
+// custom error handling
 app.use(function (err, req, res, next) {
-    console.log(chalk.magenta('      ' + err.message));
-    res.status(err.status || 500).end();
+  // clean up the trace to just relevant info
+  var cleanTrace = err.stack
+  .split('\n')
+  .filter(line => {
+    var notNodeInternal = line.indexOf(__dirname) > -1;
+    var notNodeModule = line.indexOf('node_modules') === -1;
+    return notNodeInternal && notNodeModule;
+  })
+  .join('\n');
+  // colorize and format the output
+  console.log(chalk.magenta('      ' + err.message));
+  console.log('    ' + chalk.gray(cleanTrace));
+  // send back error status
+  res.status(err.status || 500).end();
 });
 
 module.exports = app;
