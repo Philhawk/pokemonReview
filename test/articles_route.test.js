@@ -220,6 +220,24 @@ describe('Articles Route:', function () {
 
     });
 
+    // Do not assume async operations (like db writes) will work; always check
+    xit('sends back the actual created article, not just the POSTed article', function () {
+
+      return agent
+      .post('/articles')
+      .send({
+        title: 'Coconuts',
+        content: 'A full-sized coconut weighs about 1.44 kg (3.2 lb).',
+        extraneous: 'Sequelize will quietly ignore this non-schema property'
+      })
+      .expect(200)
+      .expect(function (res) {
+        expect(res.body.article.extraneous).to.be.an('undefined');
+        expect(res.body.article.version).to.equal(0);
+      });
+
+    });
+
   });
 
   /**
