@@ -193,8 +193,8 @@ describe('Articles Route:', function () {
 
     });
 
-    // This one should fail with a 500 because we don't set the article.body
-    xit('does not create a new article without a body', function () {
+    // This one should fail with a 500 because we don't set the article.content
+    xit('does not create a new article without content', function () {
 
       return agent
       .post('/articles')
